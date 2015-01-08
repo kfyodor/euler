@@ -7,7 +7,7 @@
    See http://www.cs.hmc.edu/~oneill/papers/Sieve-JFP.pdf
    for more information."
   ([]
-    (primes 2 {}))
+    (sieve-map 2 {}))
   ([n storage]
    (lazy-seq
      (let [next (inc n)]
@@ -19,9 +19,9 @@
                new-storage  (merge-with merge-fn
                                         (dissoc storage n)
                                         next-factors)]
-           (primes next new-storage))
+           (sieve-map next new-storage))
          ; else
-         (cons n (primes next
+         (cons n (sieve-map next
                          (assoc storage
                                 (* n n)
                                 (vec [n])))))))))
